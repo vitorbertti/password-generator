@@ -1,26 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './global.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Options from './components/options';
+import GeneratePassword from './components/generate-password';
+
+const App: React.FC = () => {
+   return (
+      <div className="App">
+         <h1 className="title">Welcome to Password Generator</h1>
+         <Options />
+         <GeneratePassword />
+      </div>
+   );
+};
 
 export default App;
