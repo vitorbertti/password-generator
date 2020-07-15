@@ -1,11 +1,15 @@
 import React from 'react';
 import './styles.css';
 
-const Options: React.FC = () => {
+export interface Props {
+   setLength: Function;
+}
+
+const Options: React.FC<Props> = ({ setLength }) => {
    return (
       <div className="container">
          <div className="select">
-            <select name="selectLength" id="selectId">
+            <select name="selectLength" id="selectId" onChange={(e) => setLength(e.target.value)}>
                <option value="--Select the length--">--Select the length--</option>
                <option value="4">4</option>
                <option value="5">5</option>
