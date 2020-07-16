@@ -3,9 +3,10 @@ import './styles.css';
 
 export interface Props {
    setLength: Function;
+   setUppercase: Function;
 }
 
-const Options: React.FC<Props> = ({ setLength }) => {
+const Options: React.FC<Props> = ({ setLength, setUppercase }) => {
    return (
       <div className="container">
          <div className="select">
@@ -24,7 +25,12 @@ const Options: React.FC<Props> = ({ setLength }) => {
          </div>
          <div>
             <div className="checkbox">
-               <input type="checkbox" id="uppercase" name="uppercase" />
+               <input
+                  type="checkbox"
+                  id="uppercase"
+                  name="uppercase"
+                  onChange={(e) => setUppercase(e.target.checked ? true : false)}
+               />
                <label htmlFor="uppercase">Include uppercase letters</label>
             </div>
 

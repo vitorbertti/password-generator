@@ -3,9 +3,10 @@ import './styles.css';
 
 export interface Props {
    length: string;
+   uppercase: boolean;
 }
 
-const GeneratePassword: React.FC<Props> = (length) => {
+const GeneratePassword: React.FC<Props> = ({ length, uppercase }) => {
    const [password, setPassword] = useState('');
 
    const copyPassword = () => {
@@ -17,15 +18,20 @@ const GeneratePassword: React.FC<Props> = (length) => {
    };
 
    const generate = () => {
-      if (!length.length) {
+      if (!length) {
          alert('Please select the password length');
          return;
       }
 
       let newPassword = '';
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+      if (uppercase) {
+         characters = characters.concat('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+      }
+
       const charactersLength = characters.length;
-      for (let i = 0; i < parseInt(length.length); i++) {
+      for (let i = 0; i < parseInt(length); i++) {
          newPassword += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
       setPassword(newPassword);
@@ -37,7 +43,7 @@ const GeneratePassword: React.FC<Props> = (length) => {
             Generate password
          </button>
          <div className="display-password">
-            <input className="password" id="password" type="text" value={password} />
+            <input className="password" id="password" type="text" defaultValue={password} />
             <button className="btn btn-copy" onClick={copyPassword}>
                Copy
             </button>
