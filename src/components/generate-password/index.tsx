@@ -8,6 +8,14 @@ export interface Props {
 const GeneratePassword: React.FC<Props> = (length) => {
    const [password, setPassword] = useState('');
 
+   const copyPassword = () => {
+      const copyText = document.querySelector('#password') as HTMLInputElement;
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      return;
+   };
+
    const generate = () => {
       if (!length.length) {
          alert('Please select the password length');
@@ -25,10 +33,15 @@ const GeneratePassword: React.FC<Props> = (length) => {
 
    return (
       <div className="container">
-         <button onClick={generate} type="button" className="btn">
+         <button onClick={generate} type="button" className="btn btn-generate">
             Generate password
          </button>
-         {password}
+         <div className="display-password">
+            <input className="password" id="password" type="text" value={password} />
+            <button className="btn btn-copy" onClick={copyPassword}>
+               Copy
+            </button>
+         </div>
       </div>
    );
 };
