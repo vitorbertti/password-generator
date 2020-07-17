@@ -6,9 +6,10 @@ export interface Props {
    setUppercase: Function;
    setLowercase: Function;
    setNumbers: Function;
+   setSymbols: Function;
 }
 
-const Options: React.FC<Props> = ({ setLength, setUppercase, setLowercase, setNumbers }) => {
+const Options: React.FC<Props> = ({ setLength, setUppercase, setLowercase, setNumbers, setSymbols }) => {
    return (
       <div className="container">
          <div className="select">
@@ -55,7 +56,12 @@ const Options: React.FC<Props> = ({ setLength, setUppercase, setLowercase, setNu
                <label htmlFor="numbers">Include numbers</label>
             </div>
             <div className="checkbox">
-               <input type="checkbox" id="symbols" name="symbols" />
+               <input
+                  type="checkbox"
+                  id="symbols"
+                  name="symbols"
+                  onChange={(e) => setSymbols(e.target.checked ? true : false)}
+               />
                <label htmlFor="symbols">Include symbols</label>
             </div>
          </div>

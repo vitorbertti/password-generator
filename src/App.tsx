@@ -9,6 +9,7 @@ const App: React.FC = () => {
    const [uppercase, setUppercase] = useState(false);
    const [lowercase, setLowercase] = useState(false);
    const [numbers, setNumbers] = useState(false);
+   const [symbols, setSymbols] = useState(false);
 
    return (
       <div className="App">
@@ -18,8 +19,15 @@ const App: React.FC = () => {
             setUppercase={setUppercase}
             setLowercase={setLowercase}
             setNumbers={setNumbers}
+            setSymbols={setSymbols}
          />
-         <GeneratePassword length={length} uppercase={uppercase} lowercase={lowercase} numbers={numbers} />
+         <GeneratePassword
+            length={length}
+            uppercase={uppercase}
+            lowercase={lowercase}
+            numbers={numbers}
+            symbols={symbols}
+         />
       </div>
    );
 };

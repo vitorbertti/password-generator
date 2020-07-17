@@ -6,9 +6,10 @@ export interface Props {
    uppercase: boolean;
    lowercase: boolean;
    numbers: boolean;
+   symbols: boolean;
 }
 
-const GeneratePassword: React.FC<Props> = ({ length, uppercase, lowercase, numbers }) => {
+const GeneratePassword: React.FC<Props> = ({ length, uppercase, lowercase, numbers, symbols }) => {
    const [password, setPassword] = useState('');
 
    const copyPassword = () => {
@@ -38,6 +39,10 @@ const GeneratePassword: React.FC<Props> = ({ length, uppercase, lowercase, numbe
 
       if (uppercase) {
          characters = characters.concat('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+      }
+
+      if (symbols) {
+         characters = characters.concat('!@#$%&');
       }
 
       const charactersLength = characters.length;
