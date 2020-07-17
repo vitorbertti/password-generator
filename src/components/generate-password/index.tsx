@@ -4,9 +4,11 @@ import './styles.css';
 export interface Props {
    length: string;
    uppercase: boolean;
+   lowercase: boolean;
+   numbers: boolean;
 }
 
-const GeneratePassword: React.FC<Props> = ({ length, uppercase }) => {
+const GeneratePassword: React.FC<Props> = ({ length, uppercase, lowercase, numbers }) => {
    const [password, setPassword] = useState('');
 
    const copyPassword = () => {
@@ -24,7 +26,15 @@ const GeneratePassword: React.FC<Props> = ({ length, uppercase }) => {
       }
 
       let newPassword = '';
-      let characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      let characters = '';
+
+      if (lowercase) {
+         characters = characters.concat('abcdefghijklmnopqrstuvwxyz');
+      }
+
+      if (numbers) {
+         characters = characters.concat('0123456789');
+      }
 
       if (uppercase) {
          characters = characters.concat('ABCDEFGHIJKLMNOPQRSTUVWXYZ');

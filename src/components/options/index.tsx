@@ -4,9 +4,11 @@ import './styles.css';
 export interface Props {
    setLength: Function;
    setUppercase: Function;
+   setLowercase: Function;
+   setNumbers: Function;
 }
 
-const Options: React.FC<Props> = ({ setLength, setUppercase }) => {
+const Options: React.FC<Props> = ({ setLength, setUppercase, setLowercase, setNumbers }) => {
    return (
       <div className="container">
          <div className="select">
@@ -35,11 +37,21 @@ const Options: React.FC<Props> = ({ setLength, setUppercase }) => {
             </div>
 
             <div className="checkbox">
-               <input type="checkbox" id="lowercase" name="lowercase" />
+               <input
+                  type="checkbox"
+                  id="lowercase"
+                  name="lowercase"
+                  onChange={(e) => setLowercase(e.target.checked ? true : false)}
+               />
                <label htmlFor="lowercase">Include lowercase letters</label>
             </div>
             <div className="checkbox">
-               <input type="checkbox" id="numbers" name="numbers" />
+               <input
+                  type="checkbox"
+                  id="numbers"
+                  name="numbers"
+                  onChange={(e) => setNumbers(e.target.checked ? true : false)}
+               />
                <label htmlFor="numbers">Include numbers</label>
             </div>
             <div className="checkbox">
