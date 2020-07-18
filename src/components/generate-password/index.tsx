@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import './styles.css';
 
 export interface Props {
-   length: string;
-   uppercase: boolean;
-   lowercase: boolean;
-   numbers: boolean;
-   symbols: boolean;
+   options: {
+      length: string;
+      uppercase: boolean;
+      lowercase: boolean;
+      numbers: boolean;
+      symbols: boolean;
+   };
 }
 
-const GeneratePassword: React.FC<Props> = ({ length, uppercase, lowercase, numbers, symbols }) => {
+const GeneratePassword: React.FC<Props> = ({ options }) => {
    const [password, setPassword] = useState('');
 
    const copyPassword = () => {
@@ -21,32 +23,37 @@ const GeneratePassword: React.FC<Props> = ({ length, uppercase, lowercase, numbe
    };
 
    const generate = () => {
-      if (!length) {
-         alert('Please select the password length');
+      if (!options.length || options.length === '--Select the length--') {
+         alert('Please select the password length.');
+         return;
+      }
+
+      if (!options.lowercase && !options.numbers && !options.uppercase && !options.symbols) {
+         alert('Please choose at least one option.');
          return;
       }
 
       let newPassword = '';
       let characters = '';
 
-      if (lowercase) {
+      if (options.lowercase) {
          characters = characters.concat('abcdefghijklmnopqrstuvwxyz');
       }
 
-      if (numbers) {
+      if (options.numbers) {
          characters = characters.concat('0123456789');
       }
 
-      if (uppercase) {
+      if (options.uppercase) {
          characters = characters.concat('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
       }
 
-      if (symbols) {
+      if (options.symbols) {
          characters = characters.concat('!@#$%&');
       }
 
       const charactersLength = characters.length;
-      for (let i = 0; i < parseInt(length); i++) {
+      for (let i = 0; i < parseInt(options.length); i++) {
          newPassword += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
       setPassword(newPassword);
@@ -58,7 +65,7 @@ const GeneratePassword: React.FC<Props> = ({ length, uppercase, lowercase, numbe
             Generate password
          </button>
          <div className="display-password">
-            <input className="password" id="password" type="text" defaultValue={password} />
+            <input className="password" id="password" type="text" defaultValue={password} readOnly />
             <button className="btn btn-copy" onClick={copyPassword}>
                Copy
             </button>

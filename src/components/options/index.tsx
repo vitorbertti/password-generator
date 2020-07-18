@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 
 export interface Props {
-   setLength: Function;
-   setUppercase: Function;
-   setLowercase: Function;
-   setNumbers: Function;
-   setSymbols: Function;
+   setOptions: Function;
 }
 
-const Options: React.FC<Props> = ({ setLength, setUppercase, setLowercase, setNumbers, setSymbols }) => {
+const Options: React.FC<Props> = ({ setOptions }) => {
+   const [length, setLength] = useState('');
+   const [uppercase, setUppercase] = useState(false);
+   const [lowercase, setLowercase] = useState(false);
+   const [numbers, setNumbers] = useState(false);
+   const [symbols, setSymbols] = useState(false);
+
+   useEffect(() => {
+      setOptions({ ...Options, length, uppercase, lowercase, numbers, symbols });
+   }, [length, uppercase, lowercase, numbers, symbols, setOptions]);
+
    return (
       <div className="container">
          <div className="select">
-            <select name="selectLength" id="selectId" onChange={(e) => setLength(e.target.value)}>
+            <select
+               name="selectLength"
+               id="selectId"
+               onChange={(e) => {
+                  setLength(e.target.value);
+               }}
+            >
                <option value="--Select the length--">--Select the length--</option>
                <option value="4">4</option>
                <option value="5">5</option>
